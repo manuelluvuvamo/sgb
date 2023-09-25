@@ -810,7 +810,7 @@
                 <label class="form-label" for="codigo">
                     Código</label>
                 <input type="text" class="form-control @error('codigo') is-invalid @enderror" id="codigo" name="codigo"
-                    placeholder="" required value="{{ isset($editora->codigo) ? $editora->codigo : old('codigo') }}"
+                    placeholder=""  value="{{ isset($editora->codigo) ? $editora->codigo : old('codigo') }}"
                     autofocus />
                 @error('codigo')
                     <span class="invalid-feedback" role="alert">

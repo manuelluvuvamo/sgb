@@ -56,7 +56,7 @@ class EditoraController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'pais' => 'required|string|max:255',
-            'codigo' => 'required|string|max:255',
+            'codigo' => 'string|max:255',
         ]);
 
         try {
@@ -119,7 +119,7 @@ class EditoraController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'pais' => 'required|string|max:255',
-            'codigo' => 'required|string|max:255',
+            'codigo' => 'string|max:255',
         ]);
 
         try {
