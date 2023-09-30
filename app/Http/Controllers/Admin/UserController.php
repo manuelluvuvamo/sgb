@@ -52,6 +52,12 @@ class UserController extends Controller
         return view('admin.user.index', $data);
     }
 
+    public function loggerDataError($mensagem)
+    {
+
+        $this->Logger->Log('error', $mensagem);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

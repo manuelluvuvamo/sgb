@@ -88,7 +88,19 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
         );
         /* END EDITORA*/
 
-
+        /* START PROFESSOR*/
+        Route::prefix('professor')->namespace('Admin')->group(
+            function () {
+                route::get('index', ['as' => 'admin.professor.index', 'uses' => 'ProfessorController@index']);
+                route::get('create', ['as' => 'admin.professor.create', 'uses' => 'ProfessorController@create'])->middleware(['admin']);
+                route::post('store', ['as' => 'admin.professor.store', 'uses' => 'ProfessorController@store'])->middleware(['admin']);
+                route::get('edit/{id}', ['as' => 'admin.professor.edit', 'uses' => 'ProfessorController@edit'])->middleware(['admin']);;
+                route::post('update/{id}', ['as' => 'admin.professor.update', 'uses' => 'ProfessorController@update'])->middleware(['admin']);;
+                route::get('destroy/{id}', ['as' => 'admin.professor.destroy', 'uses' => 'ProfessorController@destroy'])->middleware(['admin']);
+                route::get('purge/{id}', ['as' => 'admin.professor.purge', 'uses' => 'ProfessorController@purge'])->middleware(['admin']);
+            }
+        );
+        /* END PROFESSOR*/
     /* START LOGS */
     Route::middleware(['admin'])->prefix('log')->namespace('Admin')->group(
         function () {

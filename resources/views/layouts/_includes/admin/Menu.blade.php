@@ -901,6 +901,7 @@
                 <span class="nav-text">Autores</span>
             </a>
         </li>
+        
 
 
         <li><a href="{{ route('admin.editora.index') }}" class="ai-icon" aria-expanded="false">
@@ -909,6 +910,13 @@
             <span class="nav-text">Editoras</span>
         </a>
     </li>
+
+    <li><a href="{{ route('admin.professor.index') }}" class="ai-icon" aria-expanded="false">
+        <i class="fas fa-dice-d6" aria-hidden="true"></i>
+
+        <span class="nav-text">Professores</span>
+    </a>
+</li>
 
             
 

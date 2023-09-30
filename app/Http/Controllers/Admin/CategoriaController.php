@@ -23,6 +23,12 @@ class CategoriaController extends Controller
 
         $this->Logger->Log('info', $mensagem);
     }
+
+    public function loggerDataError($mensagem)
+    {
+
+        $this->Logger->Log('error', $mensagem);
+    }
     //
     public function index()
     {
