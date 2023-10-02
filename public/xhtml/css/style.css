@@ -2374,11 +2374,11 @@ textarea.form-control-lg {
   border-color: #731702; }
   .btn-primary:hover {
     color: #000;
-    background-color: #176af8;
+    background-color: #dc3545;
     border-color: #1e70f7; }
   .btn-check:focus + .btn-primary, .btn-primary:focus {
     color: #000;
-    background-color: #176af8;
+    background-color: #dc3545;
     border-color: #1e70f7;
     box-shadow: 0 0 0 0.25rem rgba(46, 171, 81, 0.5); }
   .btn-check:checked + .btn-primary,

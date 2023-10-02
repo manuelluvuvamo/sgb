@@ -896,29 +896,35 @@
              </li>
 
              <li><a href="{{ route('admin.autor.index') }}" class="ai-icon" aria-expanded="false">
-                <i class="fas fa-dice-d6" aria-hidden="true"></i>
+                     <i class="fas fa-dice-d6" aria-hidden="true"></i>
 
-                <span class="nav-text">Autores</span>
-            </a>
-        </li>
-        
+                     <span class="nav-text">Autores</span>
+                 </a>
+             </li>
 
 
-        <li><a href="{{ route('admin.editora.index') }}" class="ai-icon" aria-expanded="false">
-            <i class="fas fa-dice-d6" aria-hidden="true"></i>
 
-            <span class="nav-text">Editoras</span>
-        </a>
-    </li>
+             <li><a href="{{ route('admin.editora.index') }}" class="ai-icon" aria-expanded="false">
+                     <i class="fas fa-dice-d6" aria-hidden="true"></i>
 
-    <li><a href="{{ route('admin.professor.index') }}" class="ai-icon" aria-expanded="false">
-        <i class="fas fa-dice-d6" aria-hidden="true"></i>
+                     <span class="nav-text">Editoras</span>
+                 </a>
+             </li>
 
-        <span class="nav-text">Professores</span>
-    </a>
-</li>
+             <li><a href="{{ route('admin.professor.index') }}" class="ai-icon" aria-expanded="false">
+                     <i class="fas fa-dice-d6" aria-hidden="true"></i>
 
-            
+                     <span class="nav-text">Professores</span>
+                 </a>
+             </li>
+
+             <li><a href="{{ route('admin.livro.search') }}" class="ai-icon" aria-expanded="false">
+                     <i class="fas fa-dice-d6" aria-hidden="true"></i>
+
+                     <span class="nav-text">Livros</span>
+                 </a>
+             </li>
+
 
              @if (isset(Auth::user()->perfil) && Auth::user()->perfil == 'Administrador')
                  <li>
@@ -935,15 +941,6 @@
                      </a>
                  </li>
              @endif
-
-
-
-
-             
-
-
-
-
 
          </ul>
 

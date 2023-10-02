@@ -101,6 +101,22 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
             }
         );
         /* END PROFESSOR*/
+
+        /* START LIVRO*/
+        Route::prefix('livro')->namespace('Admin')->group(
+            function () {
+                route::get('search', ['as' => 'admin.livro.search', 'uses' => 'LivroController@search']);
+                route::get('index', ['as' => 'admin.livro.index', 'uses' => 'LivroController@index']);
+                route::get('create', ['as' => 'admin.livro.create', 'uses' => 'LivroController@create'])->middleware(['admin']);
+                route::post('store', ['as' => 'admin.livro.store', 'uses' => 'LivroController@store'])->middleware(['admin']);
+                route::get('edit/{id}', ['as' => 'admin.livro.edit', 'uses' => 'LivroController@edit'])->middleware(['admin']);;
+                route::post('update/{id}', ['as' => 'admin.livro.update', 'uses' => 'LivroController@update'])->middleware(['admin']);;
+                route::get('destroy/{id}', ['as' => 'admin.livro.destroy', 'uses' => 'LivroController@destroy'])->middleware(['admin']);
+                route::get('purge/{id}', ['as' => 'admin.livro.purge', 'uses' => 'LivroController@purge'])->middleware(['admin']);
+                route::post('update/disponibilidade/{id}/{disponibilidade}', ['as' => 'admin.livro.update.disponibilidade', 'uses' => 'LivroController@updateDisponibilidade'])->middleware(['admin']);
+            }
+        );
+        /* END LIVRO*/
     /* START LOGS */
     Route::middleware(['admin'])->prefix('log')->namespace('Admin')->group(
         function () {
