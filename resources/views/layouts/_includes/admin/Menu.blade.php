@@ -873,7 +873,7 @@
          <ul class="metismenu" id="menu">
              @if (isset(Auth::user()->perfil) && Auth::user()->perfil == 'Administrador')
                  <li><a href="{{ route('admin.dash') }}" class="ai-icon" aria-expanded="false">
-                         <i class="fas fa-dice-d6" aria-hidden="true"></i>
+                         <i class="fas fa-home" aria-hidden="true"></i>
 
                          <span class="nav-text">Painel</span>
                      </a>
@@ -896,7 +896,7 @@
              </li>
 
              <li><a href="{{ route('admin.autor.index') }}" class="ai-icon" aria-expanded="false">
-                     <i class="fas fa-dice-d6" aria-hidden="true"></i>
+                     <i class="fas fa-users" aria-hidden="true"></i>
 
                      <span class="nav-text">Autores</span>
                  </a>
@@ -905,7 +905,7 @@
 
 
              <li><a href="{{ route('admin.editora.index') }}" class="ai-icon" aria-expanded="false">
-                     <i class="fas fa-dice-d6" aria-hidden="true"></i>
+                     <i class="fas fa-building" aria-hidden="true"></i>
 
                      <span class="nav-text">Editoras</span>
                  </a>
@@ -919,11 +919,18 @@
              </li>
 
              <li><a href="{{ route('admin.livro.search') }}" class="ai-icon" aria-expanded="false">
-                     <i class="fas fa-dice-d6" aria-hidden="true"></i>
+                     <i class="fas fa-book" aria-hidden="true"></i>
 
                      <span class="nav-text">Livros</span>
                  </a>
              </li>
+
+             <li><a href="{{ route('admin.emprestimo.search') }}" class="ai-icon" aria-expanded="false">
+                <i class="fas fa-handshake " aria-hidden="true"></i>
+
+                <span class="nav-text">Empréstimos</span>
+                </a>
+            </li>
 
 
              @if (isset(Auth::user()->perfil) && Auth::user()->perfil == 'Administrador')

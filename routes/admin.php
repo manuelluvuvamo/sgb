@@ -117,6 +117,22 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
             }
         );
         /* END LIVRO*/
+
+        /* START EMPRÉSTIMO*/
+        Route::prefix('emprestimo')->namespace('Admin')->group(
+            function () {
+                route::get('search', ['as' => 'admin.emprestimo.search', 'uses' => 'EmprestimoController@search']);
+                route::get('index', ['as' => 'admin.emprestimo.index', 'uses' => 'EmprestimoController@index']);
+                route::get('create', ['as' => 'admin.emprestimo.create', 'uses' => 'EmprestimoController@create'])->middleware(['admin']);
+                route::post('store', ['as' => 'admin.emprestimo.store', 'uses' => 'EmprestimoController@store'])->middleware(['admin']);
+                route::get('edit/{id}', ['as' => 'admin.emprestimo.edit', 'uses' => 'EmprestimoController@edit'])->middleware(['admin']);;
+                route::post('update/{id}', ['as' => 'admin.emprestimo.update', 'uses' => 'EmprestimoController@update'])->middleware(['admin']);;
+                route::get('destroy/{id}', ['as' => 'admin.emprestimo.destroy', 'uses' => 'EmprestimoController@destroy'])->middleware(['admin']);
+                route::get('purge/{id}', ['as' => 'admin.emprestimo.purge', 'uses' => 'EmprestimoController@purge'])->middleware(['admin']);
+                route::post('update/estado/{id}/{estado}', ['as' => 'admin.emprestimo.update.estado', 'uses' => 'EmprestimoController@updateEstado'])->middleware(['admin']);
+            }
+        );
+        /* END EMPRÉSTIMO*/
     /* START LOGS */
     Route::middleware(['admin'])->prefix('log')->namespace('Admin')->group(
         function () {

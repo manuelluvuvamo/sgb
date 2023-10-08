@@ -179,7 +179,7 @@ class LogController extends Controller
         //dd($request);
 
 
-        try {
+      /*   try { */
             //code...
 
             if ($request->name != "null") {
@@ -280,7 +280,7 @@ class LogController extends Controller
                 ini_set('pcre.backtrack_limit', 2000000); // ou 3000000
 
 
-                try {
+                /* try { */
                     $mpdf->SetHTMLFooter('<h5><div class="text-left">' . $date . '</div></h5>');
                     $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
                     $mpdf->WriteHTML($css1, \Mpdf\HTMLParserMode::HEADER_CSS);
@@ -288,11 +288,11 @@ class LogController extends Controller
                     //ini_set("pcre.backtrack_limit", "5000000");
                     $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
                     $mpdf->Output("Relatório de Actividades", "I");
-                } catch (\Throwable $th) {
+               /*  } catch (\Throwable $th) {
                     //throw $th;
                     $this->loggerDataError($th->getMessage());
                     return redirect()->back()->with("logs.search.print2.false", 1);
-                }
+                } */
 
 
             } else {
@@ -303,10 +303,10 @@ class LogController extends Controller
 
 
 
-        } catch (\Throwable $th) {
+        /* } catch (\Throwable $th) {
             //throw $th;
             $this->loggerDataError($th->getMessage());
             return redirect()->back()->with("logs.search.print3.false", 1);
-        }
+        } */
     }
 }
