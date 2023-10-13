@@ -40,27 +40,28 @@
                                                 @if (Auth::user()->perfil == 'Administrador')
                                                     <td>{{ $emprestimo->id }}</td>
                                                 @endif
-                                                <td>{{ $emprestimo->primeiro_nome." ".$emprestimo->sobrenome }}</td>
+                                                <td>{{ $emprestimo->primeiro_nome . ' ' . $emprestimo->sobrenome }}</td>
                                                 <td>
                                                     @foreach ($emprestimo->livro_emprestimos as $key => $livro)
-                                                    @if ($key != 0)
-                                                    ||
-                                                    @endif
-                                                        {{$livro->titulo}}
+                                                        @if ($key != 0)
+                                                            ||
+                                                        @endif
+                                                        {{ $livro->titulo }}
                                                     @endforeach
                                                 </td>
-                                                <td>{{ date("d-m-Y", strtotime($emprestimo->data_levantamento)) }}</td>
-                                                <td>{{ date("d-m-Y", strtotime($emprestimo->data_entrega)) }}</td>
-                         
-                                                
-                                              
+                                                <td>{{ date('d-m-Y', strtotime($emprestimo->data_levantamento)) }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($emprestimo->data_entrega)) }}</td>
+
+
+
                                                 <td class="estado">
 
                                                     <select id="{{ 'dest' . $emprestimo->id }}" name="estado"
                                                         class="form-control border-2" required>
 
                                                         @if ($emprestimo->estado == 0)
-                                                            <option value="0" class="" selected>Não Entregue</option>
+                                                            <option value="0" class="" selected>Não Entregue
+                                                            </option>
                                                             <option value="1" class="">Entregue
                                                             </option>
                                                         @elseif($emprestimo->estado == 1)
@@ -85,11 +86,16 @@
                                                         <ul class="dropdown-menu dropdown-menu-end">
 
                                                             <a class="dropdown-item"
+                                                                href="{{ route('admin.emprestimo.imprimir.ficha', $emprestimo->id) }}" target="_blank"><i
+                                                                    class="fa fa-print" aria-hidden="true"></i>
+                                                                Imprimir Ficha</a>
+
+                                                            <a class="dropdown-item"
                                                                 href="{{ route('admin.emprestimo.edit', $emprestimo->id) }}"><i
                                                                     class="fa fa-pencil" aria-hidden="true"></i>
                                                                 Editar</a>
 
-                                                                @if (Auth::user()->perfil == 'Administrador')
+                                                            @if (Auth::user()->perfil == 'Administrador')
                                                                 <a class="dropdown-item destroy"
                                                                     href="{{ route('admin.emprestimo.destroy', $emprestimo->id) }}"><i
                                                                         class="fa fa-trash" aria-hidden="true"></i>
@@ -101,7 +107,7 @@
                                                                     href="{{ route('admin.emprestimo.purge', $emprestimo->id) }}"><i
                                                                         class="fa fa-trash" aria-hidden="true"></i>
                                                                     Purgar</a>
-                                                                    @endif
+                                                            @endif
 
                                                         </ul>
                                                     </div>
@@ -117,7 +123,7 @@
                                     @endif
                                 </tbody>
                             </table>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -248,7 +254,8 @@
             if ($('#' + id + ' > option').length === 1) {
                 console.log('Inside if condition');
 
-                $('#' + id)[0].innerHTML += '<option value="0">Não Entregue</option><option value="1">Entregue</option>';
+                $('#' + id)[0].innerHTML +=
+                    '<option value="0">Não Entregue</option><option value="1">Entregue</option>';
             }
 
 
@@ -307,5 +314,27 @@
     </script>
 
 
+
+    @if (session('emprestimo.imprimir.ficha.false'))
+        <script>
+            Swal.fire(
+                'Erro ao imprimir a Ficha de Empréstimo.',
+                '',
+                'error'
+            )
+        </script>
+    @endif
+
+
+
+    @if (session('emprestimo.imprimir.ficha3.false'))
+        <script>
+            Swal.fire(
+                'Houve algum erro, tente novamente em breve!',
+                '',
+                'error'
+            )
+        </script>
+    @endif
 
 @endsection

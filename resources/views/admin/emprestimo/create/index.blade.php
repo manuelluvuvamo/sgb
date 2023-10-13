@@ -86,4 +86,27 @@
         </script>
     @endif
 
+    @if (session('emprestimo.create.error.disponibilidade'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Impossível Realizar esta Operação!',
+            text: "{{session('emprestimo.create.error.disponibilidade')}}",
+            timer: 6e3,
+            timerProgressBar: !0,
+            didOpen: function() {
+                Swal.showLoading(), t = setInterval(function() {
+                    var t, e = Swal.getHtmlContainer();
+                    !e || (t = e.querySelector("b")) && (t.textContent = Swal.getTimerLeft())
+                }, 100)
+            },
+            onClose: function() {
+                clearInterval(t)
+            }
+        }).then(function(t) {
+            t.dismiss === Swal.DismissReason.timer && console.log("I was closed by the timer")
+        })
+    </script>
+@endif
+
 @endsection

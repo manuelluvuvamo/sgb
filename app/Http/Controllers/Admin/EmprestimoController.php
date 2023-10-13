@@ -142,11 +142,13 @@ class EmprestimoController extends Controller
             'id_professor.required' => 'A Professor é um campo obrigatório.',
         ]);
 
-        try {
+        /* try { */
 
             $array['data_levantamento'] = $request->data_levantamento;
             $array['data_entrega'] = $request->data_entrega;
             $array['id_professor'] = $request->id_professor;
+             
+            $this->verificar_disponibilidade_livro($request->id_livro);
 
             if ($this->existis($array)) {
                 return redirect()->back()->with("emprestimo.create.existis", 1);
@@ -167,6 +169,12 @@ class EmprestimoController extends Controller
                     'id_livro' => $id_livro,
 
                 ]);
+                $qnt = Livro::find($id_livro)->id;
+                dd($qnt);
+               /*  
+                Livro::find($id_livro)->update([
+                    "quantidade" => ($l->quantidade-1)
+                ]); */
             }
 
             $professor = Professor::find($request->id_professor);
@@ -213,11 +221,11 @@ class EmprestimoController extends Controller
             return redirect()->back()->with('emprestimo.create.success', 1);
 
 
-        } catch (\Throwable $th) {
+        /* } catch (\Throwable $th) {
             //throw $th;
             $this->loggerDataError($th->getMessage());
             return redirect()->back()->with('emprestimo.create.error', 1);
-        }
+        } */
 
     }
 
@@ -276,6 +284,8 @@ class EmprestimoController extends Controller
             ]);
 
         try {
+
+            $this->verificar_disponibilidade_livro($request->id_livro);
 
             $array['data_levantamento'] = $request->data_levantamento;
             $array['data_entrega'] = $request->data_entrega;
@@ -388,5 +398,101 @@ class EmprestimoController extends Controller
         return response()->json($emprestimo);
     }
 
+
+    public function imprirFicha($id)
+    {
+       
+            try {
+                //code...
+            $data["emprestimo"] = Emprestimo::join('professors', 'emprestimos.id_professor', 'professors.id')
+                ->select('professors.primeiro_nome','professors.sobrenome', 'emprestimos.*')
+                ->with([
+                    'livro_emprestimos' => function ($query) {
+                        $query
+                            ->join('livros', 'livro_emprestimos.id_livro', 'livros.id')->select('livros.*', 'livros.id as id_livro', 'livro_emprestimos.*');
+                    }
+                ])
+            ->where('emprestimos.id', $id)->get()->first();
+
+            $mpdf = new \Mpdf\Mpdf(['orientation' => 'P']);
+                $date = date('d-m-Y');
+
+
+                $css = file_get_contents("css/bootstrap.min.css");
+                $css1 = file_get_contents("css/style.css");
+
+                $html = view("admin.pdfs.emprestimo.ficha.index", $data);
+                ini_set('pcre.backtrack_limit', 2000000); // ou 3000000
+
+
+                try {
+                    $mpdf->SetHTMLFooter('<h5><div class="text-left">' . $date . '</div></h5>');
+                    $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
+                    $mpdf->WriteHTML($css1, \Mpdf\HTMLParserMode::HEADER_CSS);
+                    //ini_set('max_execution_time', '300');
+                    //ini_set("pcre.backtrack_limit", "5000000");
+                    $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+                    $mpdf->Output("Ficha de empréstimo", "I");
+                } catch (\Throwable $th) {
+                    //throw $th;
+                    $this->loggerDataError($th->getMessage());
+                    return redirect()->back()->with("emprestimo.imprimir.ficha.false", 1);
+                }
+   
+            } catch (\Throwable $th) {
+                return redirect()->back()->with("emprestimo.imprimir.ficha3.false", 1);
+            }
+    }
+
+    public function verificar_disponibilidade_livro($id_livros){
+        $mensagem = "";
+        $livros = [];
+        $livros["quantidade"] = [];
+        $livros["disponibilidade"] = [];
+        foreach($id_livros as $id_livro){
+            $livro = Livro::find($id_livro);
+
+            //dd($livro);
+           
+            if($livro->quantidade == 0){
+                array_push($livros["quantidade"], $livro);
+            }else if($livro->disponibilidade == 0){
+                array_push($livros["disponibilidade"], $livro);
+            }
+        }
+
+       
+
+        if(count($livros["quantidade"]) > 0){
+            $mensagem = (count($livros["quantidade"]) > 1)?"Os livros: ": "O livro: ";
+
+            foreach ($livros["quantidade"] as $key => $livro) {
+                if ($key != 0){
+                    $mensagem.= ", ";
+                }
+                $mensagem.= $livro->titulo;
+            }
+
+            $mensagem .= (count($livros["quantidade"]) > 1)?", não possuem exemplares suficientes para empréstimo. ": ", não possui exemplares suficientes para empréstimo. ";
+        }
+
+        if(count($livros["disponibilidade"]) > 0){
+            $mensagem .= (count($livros["disponibilidade"]) > 1)?"Os livros: ": "O livro: ";
+
+            foreach ($livros["disponibilidade"] as $key => $livro) {
+                if ($key != 0){
+                    $mensagem.= ", ";
+                }
+                $mensagem.= $livro->titulo;
+            }
+
+            $mensagem .= (count($livros["disponibilidade"]) > 1)?", não estão disponíveis. ": ", não está disponível. ";
+        }
+        //dd($mensagem);
+        if(count($livros["quantidade"]) > 0 || count($livros["disponibilidade"]) > 0){
+            //dd("fpo");
+        return redirect()->back()->with('emprestimo.create.error.disponibilidade',$mensagem );
+        }
+    }
   
 }

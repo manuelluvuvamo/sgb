@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+Route::
+        namespace('Site')->group(function () {
+            Route::get('/', ['as' => 'site.home', 'uses' => 'HomeController@index']);
+        });
 
+        
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
