@@ -932,6 +932,13 @@
                 </a>
             </li>
 
+            <li><a href="{{ route('admin.leitura.search') }}" class="ai-icon" aria-expanded="false">
+                <i class="fas fa-book " aria-hidden="true"></i>
+
+                <span class="nav-text">Leituras</span>
+                </a>
+            </li>
+
 
              @if (isset(Auth::user()->perfil) && Auth::user()->perfil == 'Administrador')
                  <li>

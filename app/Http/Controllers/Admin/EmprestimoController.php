@@ -183,6 +183,7 @@ class EmprestimoController extends Controller
 
 
             $data["emprestimo"] = Emprestimo::join('professors', 'emprestimos.id_professor', 'professors.id')
+            ->leftjoin('users', 'emprestimos.id_user', 'users.id')
                 ->select('professors.primeiro_nome','professors.sobrenome', 'emprestimos.*')
                 ->with([
                     'livro_emprestimos' => function ($query) {
@@ -204,13 +205,13 @@ class EmprestimoController extends Controller
 
 
                 try {
-                    $mpdf->SetHTMLFooter('<h5><div class="text-left">' . $date . '</div></h5>');
+                    $mpdf->SetHTMLFooter('<div style="margin-left:450px;text-align:center;"> ______________________________<br><br>'.$data["emprestimo"]->user.'</div> <h5><div class="text-left">' . $date . '</div></h5>');
                     $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
                     $mpdf->WriteHTML($css1, \Mpdf\HTMLParserMode::HEADER_CSS);
                     //ini_set('max_execution_time', '300');
                     //ini_set("pcre.backtrack_limit", "5000000");
                     $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
-                    $mpdf->Output("Relatório de Actividades", "I");
+                    $mpdf->Output("Ficha de Empréstimo", "I");
                 } catch (\Throwable $th) {
                     //throw $th;
                     $this->loggerDataError($th->getMessage());

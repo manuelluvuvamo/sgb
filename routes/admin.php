@@ -134,6 +134,23 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
             }
         );
         /* END EMPRÉSTIMO*/
+
+         /* START LEITURA*/
+         Route::prefix('leitura')->namespace('Admin')->group(
+            function () {
+                route::get('search', ['as' => 'admin.leitura.search', 'uses' => 'LeituraController@search']);
+                route::get('index', ['as' => 'admin.leitura.index', 'uses' => 'LeituraController@index']);
+                route::get('create', ['as' => 'admin.leitura.create', 'uses' => 'LeituraController@create'])->middleware(['admin']);
+                route::post('store', ['as' => 'admin.leitura.store', 'uses' => 'LeituraController@store'])->middleware(['admin']);
+                route::get('edit/{id}', ['as' => 'admin.leitura.edit', 'uses' => 'LeituraController@edit'])->middleware(['admin']);
+                route::post('update/{id}', ['as' => 'admin.leitura.update', 'uses' => 'LeituraController@update'])->middleware(['admin']);;
+                route::get('destroy/{id}', ['as' => 'admin.leitura.destroy', 'uses' => 'LeituraController@destroy'])->middleware(['admin']);
+                route::get('purge/{id}', ['as' => 'admin.leitura.purge', 'uses' => 'LeituraController@purge'])->middleware(['admin']);
+                route::post('update/estado/{id}/{estado}', ['as' => 'admin.leitura.update.estado', 'uses' => 'LeituraController@updateEstado'])->middleware(['admin']);
+                route::get('imprir/ficha/{id}', ['as' => 'admin.leitura.imprimir.ficha', 'uses' => 'LeituraController@imprirFicha'])->middleware(['admin']);;
+            }
+        );
+        /* END LEITURA*/
     /* START LOGS */
     Route::middleware(['admin'])->prefix('log')->namespace('Admin')->group(
         function () {
