@@ -82,7 +82,7 @@
                                  <div class="auth-form">
                                      <div class="text-center mb-3">
                                          <a href="{{ url('/') }}"><img
-                                                 src="{{ asset('xhtml/images/logo.png') }}" alt="" width="100" style="border-radius: 50%;"></a>
+                                                 src="{{ asset('xhtml/images/logo.webp') }}" alt="" width="250"></a>
                                      </div>
                                      <h4 class="text-center mb-4">Iniciar Sessão</h4>
                                      <form method="POST" action="{{ route('login') }}">

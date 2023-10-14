@@ -1,98 +1,104 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Empréstimo de Livros</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- {{-- <title>Document</title> --}} -->
 
-        .receipt {
-            width: 80%;
-            margin: 0 auto;
-            border: 1px solid #000;
-            padding: 20px;
-        }
-
-        .library-name {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .receipt-header {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .receipt-content {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .receipt-signature {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th,
-        td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="receipt">
-        <div class="library-name">
-            Sistema de Gestão Bibliotecária
-        </div>
-        <div class="receipt-header">
-            Recibo de Empréstimo de Livros
-        </div>
-        <div class="receipt-content">
-            <p><strong>Data do Empréstimo:</strong> {{ date('d-m-Y', strtotime($emprestimo->data_levantamento)) }}</p>
-            <p><strong>Nome do Professor:</strong> {{ $emprestimo->primeiro_nome . ' ' . $emprestimo->sobrenome }}</p>
-            <p><strong>Data de Devolução:</strong> {{ date('d-m-Y', strtotime($emprestimo->data_entrega)) }}</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Título do Livro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($emprestimo->livro_emprestimos as $key => $livro)
-                        <tr>
-                            <td> {{ $livro->titulo }}</td>
+    <img class="logo-abbr" src="xhtml/images/logo.webp" width="200" style="position: absolute; top: 100; left: 100;">
+    <div class="text-center">
+        <p>
+
+            <br>
+            <strong>SISTEMA DE GESTÃO BIBLIOTECÁRIA</strong><br>
 
 
-                        </tr>
-                    @endforeach
-                    <!-- Adicione mais linhas conforme necessário para listar todos os livros emprestados -->
-                </tbody>
-            </table>
-        </div>
-        <div class="receipt-signature">
-            ______________________________<br>
-            Assinatura do Bibliotecário
-        </div>
+        </p>
     </div>
+    @php
+        setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('Africa/Luanda');
+    @endphp
+    <h3>
+        <div class="text-center">FICHA DE EMRPÉSTIMO DE LIVROS</div>
+    </h3>
+    <br><br>
+    <div id="dados">
+
+        <p class="text-left" style="line-height: 10px;"><span style="font-weight: bold;"><strong>Data do
+                    Empréstimo:</span> <span style="text-transform: capitalize;">
+                {{ date('d-m-Y', strtotime($emprestimo->data_levantamento)) }}</span></p>
+
+
+        <p class="text-left" style="line-height: 10px;"><span style="font-weight: bold;"><strong>Nome do
+                    Professor:</span> <span style="text-transform: capitalize;">
+                {{ $emprestimo->primeiro_nome . ' ' . $emprestimo->sobrenome }}</span></p>
+
+
+        <p class="text-left" style="line-height: 10px;"><span style="font-weight: bold;"><strong>Data de
+                    Devolução:</span> <span style="text-transform: capitalize;">
+                {{ date('d-m-Y', strtotime($emprestimo->data_entrega)) }}</span></p>
+
+    </div>
+    <br><br>
+    <table class="table datatables table-hover table-bordered" id="datatable-ajax-crud">
+        <thead class="thead-dark">
+            <tr class="text-center">
+
+
+
+                <th style="text-transform: uppercase;">TÍTULO DO LIVRO</th>
+                <th style="text-transform: uppercase;">EDITORA</th>
+                <th style="text-transform: uppercase;">VOLUME</th>
+                <th style="text-transform: uppercase;">AUTORES</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+
+            @foreach ($emprestimo->livro_emprestimos as $key => $livro)
+                <tr class="text-center">
+
+                    <td>{{ $livro->titulo }}</td>
+                    <td>{{ $livro->editora }}</td>
+                    <td>{{ $livro->volume }}</td>
+
+
+                    <td>
+                        @php
+                            $autores = getAutores($livro->id_livro);
+
+                            //dd($autores);
+                        @endphp
+                        @foreach ($autores as $key => $autor)
+                                            @if ($key != 0)
+                                                ;
+                                            @endif
+                                            {{ $autor->nome }}
+                                        @endforeach
+                    </td>
+
+                </tr>
+            @endforeach
+
+
+
+
+        </tbody>
+    </table>
+
+   {{--  <div class="" style="margin-top: 200px;">
+        ______________________________<br>
+        Assinatura do Bibliotecário
+    </div>
+ --}}
+
+
+
 </body>
 
 </html>

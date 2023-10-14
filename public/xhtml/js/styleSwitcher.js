@@ -61,11 +61,11 @@ function addSwitcher()
 			setCookie('logo_src', './xhtml/images/logo-white.png');
 			setCookie('logo_src2', 'xhtml/images/logo-text-white.png');
 		}else{
-			jQuery(".nav-header .logo-abbr").attr("src", "./xhtml/images/logo.png");
+			jQuery(".nav-header .logo-abbr").attr("src", "./xhtml/images/logo.webp");
 			jQuery(".nav-header .logo-compact").attr("src", "xhtml/images/logo-text.png");
 			jQuery(".nav-header .brand-title").attr("src", "xhtml/images/logo-text.png");
 			
-			setCookie('logo_src', './xhtml/images/logo.png');
+			setCookie('logo_src', './xhtml/images/logo.webp');
 			setCookie('logo_src2', 'xhtml/images/logo-text.png');
 		} */
 		
@@ -168,8 +168,8 @@ function addSwitcher()
     
 	
 	/* jQuery("#nav_header_color_1").on('click',function(){
-		jQuery(".nav-header .logo-abbr").attr("src", "./xhtml/images/logo.png");
-		setCookie('logo_src', './xhtml/images/logo.png');
+		jQuery(".nav-header .logo-abbr").attr("src", "./xhtml/images/logo.webp");
+		setCookie('logo_src', './xhtml/images/logo.webp');
 		return false;
     }); */
     

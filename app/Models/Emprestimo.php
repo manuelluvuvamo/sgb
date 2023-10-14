@@ -21,7 +21,8 @@ class Emprestimo extends Model
         'data_levantamento',
         'data_entrega',
         'id_professor',
-        'estado'
+        'estado',
+        'id_user'
     ];
 
     protected $dates = ['deleted_at'];

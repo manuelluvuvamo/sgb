@@ -9,13 +9,13 @@
 
 </head>
 
-<body>
+<body> 
+    <img class="logo-abbr" src="xhtml/images/logo.webp"  width="200" style="position: absolute; top: 100; left: 100;">
     <div class="text-center">
         <p>
-            <img class="logo-abbr" src="xhtml/images/logo.png" style="font-weight: bold; border-radius: 50%;"
-                width="100">
+           
             <br>
-            <strong>Sistema de Gestão Bibliotecária</strong><br>
+            <strong>SISTEMA DE GESTÃO BIBLIOTECÁRIA</strong><br>
 
           
         </p>

@@ -158,6 +158,7 @@ class EmprestimoController extends Controller
                 'data_levantamento' => $request->data_levantamento ? $request->data_levantamento : date("Y-m-d H:i:s"),
                 'data_entrega' => $request->data_entrega,
                 'id_professor' => $request->id_professor,
+                'id_user' => Auth::user()->id,
     
             ]);
 
@@ -169,12 +170,12 @@ class EmprestimoController extends Controller
                     'id_livro' => $id_livro,
 
                 ]);
-                $qnt = Livro::find($id_livro)->id;
-                dd($qnt);
-               /*  
+                $livro = Livro::find($id_livro);
+              
+                
                 Livro::find($id_livro)->update([
-                    "quantidade" => ($l->quantidade-1)
-                ]); */
+                    "quantidade" => ($livro->quantidade-1)
+                ]);
             }
 
             $professor = Professor::find($request->id_professor);
@@ -296,6 +297,7 @@ class EmprestimoController extends Controller
                 'data_levantamento' => $request->data_levantamento,
                 'data_entrega' => $request->data_entrega,
                 'id_professor' => $request->id_professor,
+                
             ]);
 
             //dd($request->id_autor);
@@ -393,6 +395,30 @@ class EmprestimoController extends Controller
         $id = intval(substr($id, $dest_position));
 
         $a = Emprestimo::find($id);
+
+        $id_livros = LivroEmprestimo::where("id_emprestimo", $id)->select("id_livro")->get();
+
+      
+        foreach ($id_livros as $item) {
+           
+            $livro = Livro::find($item->id_livro);
+                 
+            if ($estado == 1) {
+                Livro::find($item->id_livro)->update([
+                    "quantidade" => ($livro->quantidade+1)
+                ]);
+            }else {
+                Livro::find($item->id_livro)->update([
+                    "quantidade" => ($livro->quantidade-1)
+                ]);
+            }
+        }
+
+
+
+
+
+
         $emprestimo = Emprestimo::find($id)->update(['estado' => $estado]);
         $this->loggerData(" Editou o estado do emprestimo  de id, estado, ($a->id, $a->estado) para ($estado)");
         return response()->json($emprestimo);
@@ -405,11 +431,13 @@ class EmprestimoController extends Controller
             try {
                 //code...
             $data["emprestimo"] = Emprestimo::join('professors', 'emprestimos.id_professor', 'professors.id')
-                ->select('professors.primeiro_nome','professors.sobrenome', 'emprestimos.*')
+            ->leftjoin('users', 'emprestimos.id_user', 'users.id')
+                ->select('users.name as user','professors.primeiro_nome','professors.sobrenome', 'emprestimos.*')
                 ->with([
                     'livro_emprestimos' => function ($query) {
                         $query
-                            ->join('livros', 'livro_emprestimos.id_livro', 'livros.id')->select('livros.*', 'livros.id as id_livro', 'livro_emprestimos.*');
+                            ->join('livros', 'livro_emprestimos.id_livro', 'livros.id')
+                            ->join('editoras', 'livros.id_editora', 'editoras.id')->select('livros.*', 'livros.id as id_livro', 'livro_emprestimos.*', 'editoras.nome as editora');
                     }
                 ])
             ->where('emprestimos.id', $id)->get()->first();
@@ -426,7 +454,7 @@ class EmprestimoController extends Controller
 
 
                 try {
-                    $mpdf->SetHTMLFooter('<h5><div class="text-left">' . $date . '</div></h5>');
+                    $mpdf->SetHTMLFooter('<div style="margin-left:450px;text-align:center;"> ______________________________<br><br>'.$data["emprestimo"]->user.'</div> <h5><div class="text-left">' . $date . '</div></h5>');
                     $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
                     $mpdf->WriteHTML($css1, \Mpdf\HTMLParserMode::HEADER_CSS);
                     //ini_set('max_execution_time', '300');

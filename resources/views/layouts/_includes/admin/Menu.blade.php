@@ -3,8 +3,8 @@
         ***********************************-->
  <div class="nav-header">
      <a href="{{ url('/') }}" class="brand-logo">
-         <img class="logo-abbr" src="{{ asset('xhtml/images/logo.png') }}" style="font-weight: bold; border-radius: 50%;"
-             width="100">
+         <img class="logo-abbr" src="{{ asset('xhtml/images/logo.webp') }}"
+             width="250" style="width: 250px!important;">
          {{-- <img class="brand-title" src="{{ asset('xhtml/images/logo-text.png') }}" style="font-weight: bold;"> --}}
 
      </a>
