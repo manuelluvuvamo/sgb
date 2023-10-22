@@ -37,7 +37,7 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
             route::post('update/{id}', ['as' => 'admin.user.update', 'uses' => 'UserController@update']);
             route::get('destroy/{id}', ['as' => 'admin.user.destroy', 'uses' => 'UserController@destroy'])->middleware(['admin']);
             route::get('purge/{id}', ['as' => 'admin.user.purge', 'uses' => 'UserController@purge'])->middleware(['admin']);
-            route::get('perfil', ['as' => 'admin.user.perfil', 'uses' => 'UserController@perfil'])->middleware(['admin']);
+            route::get('perfil', ['as' => 'admin.user.perfil', 'uses' => 'UserController@perfil'])->middleware(['bibliotecario']);
 
         }
     );
@@ -113,7 +113,7 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
                 route::post('update/{id}', ['as' => 'admin.livro.update', 'uses' => 'LivroController@update'])->middleware(['admin']);;
                 route::get('destroy/{id}', ['as' => 'admin.livro.destroy', 'uses' => 'LivroController@destroy'])->middleware(['admin']);
                 route::get('purge/{id}', ['as' => 'admin.livro.purge', 'uses' => 'LivroController@purge'])->middleware(['admin']);
-                route::post('update/disponibilidade/{id}/{disponibilidade}', ['as' => 'admin.livro.update.disponibilidade', 'uses' => 'LivroController@updateDisponibilidade'])->middleware(['admin']);
+                route::post('update/disponibilidade/{id}/{disponibilidade}', ['as' => 'admin.livro.update.disponibilidade', 'uses' => 'LivroController@updateDisponibilidade'])->middleware(['bibliotecario']);
             }
         );
         /* END LIVRO*/
@@ -123,14 +123,14 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
             function () {
                 route::get('search', ['as' => 'admin.emprestimo.search', 'uses' => 'EmprestimoController@search']);
                 route::get('index', ['as' => 'admin.emprestimo.index', 'uses' => 'EmprestimoController@index']);
-                route::get('create', ['as' => 'admin.emprestimo.create', 'uses' => 'EmprestimoController@create'])->middleware(['admin']);
-                route::post('store', ['as' => 'admin.emprestimo.store', 'uses' => 'EmprestimoController@store'])->middleware(['admin']);
+                route::get('create', ['as' => 'admin.emprestimo.create', 'uses' => 'EmprestimoController@create'])->middleware(['bibliotecario']);
+                route::post('store', ['as' => 'admin.emprestimo.store', 'uses' => 'EmprestimoController@store'])->middleware(['bibliotecario']);
                 route::get('edit/{id}', ['as' => 'admin.emprestimo.edit', 'uses' => 'EmprestimoController@edit'])->middleware(['admin']);
                 route::post('update/{id}', ['as' => 'admin.emprestimo.update', 'uses' => 'EmprestimoController@update'])->middleware(['admin']);;
                 route::get('destroy/{id}', ['as' => 'admin.emprestimo.destroy', 'uses' => 'EmprestimoController@destroy'])->middleware(['admin']);
                 route::get('purge/{id}', ['as' => 'admin.emprestimo.purge', 'uses' => 'EmprestimoController@purge'])->middleware(['admin']);
-                route::post('update/estado/{id}/{estado}', ['as' => 'admin.emprestimo.update.estado', 'uses' => 'EmprestimoController@updateEstado'])->middleware(['admin']);
-                route::get('imprir/ficha/{id}', ['as' => 'admin.emprestimo.imprimir.ficha', 'uses' => 'EmprestimoController@imprirFicha'])->middleware(['admin']);;
+                route::post('update/estado/{id}/{estado}', ['as' => 'admin.emprestimo.update.estado', 'uses' => 'EmprestimoController@updateEstado'])->middleware(['bibliotecario']);
+                route::get('imprir/ficha/{id}', ['as' => 'admin.emprestimo.imprimir.ficha', 'uses' => 'EmprestimoController@imprirFicha'])->middleware(['bibliotecario']);;
             }
         );
         /* END EMPRÉSTIMO*/
@@ -140,14 +140,14 @@ Route::middleware(['auth','bibliotecario'])->group(function () {
             function () {
                 route::get('search', ['as' => 'admin.leitura.search', 'uses' => 'LeituraController@search']);
                 route::get('index', ['as' => 'admin.leitura.index', 'uses' => 'LeituraController@index']);
-                route::get('create', ['as' => 'admin.leitura.create', 'uses' => 'LeituraController@create'])->middleware(['admin']);
-                route::post('store', ['as' => 'admin.leitura.store', 'uses' => 'LeituraController@store'])->middleware(['admin']);
+                route::get('create', ['as' => 'admin.leitura.create', 'uses' => 'LeituraController@create'])->middleware(['bibliotecario']);
+                route::post('store', ['as' => 'admin.leitura.store', 'uses' => 'LeituraController@store'])->middleware(['bibliotecario']);
                 route::get('edit/{id}', ['as' => 'admin.leitura.edit', 'uses' => 'LeituraController@edit'])->middleware(['admin']);
                 route::post('update/{id}', ['as' => 'admin.leitura.update', 'uses' => 'LeituraController@update'])->middleware(['admin']);;
                 route::get('destroy/{id}', ['as' => 'admin.leitura.destroy', 'uses' => 'LeituraController@destroy'])->middleware(['admin']);
                 route::get('purge/{id}', ['as' => 'admin.leitura.purge', 'uses' => 'LeituraController@purge'])->middleware(['admin']);
-                route::post('update/estado/{id}/{estado}', ['as' => 'admin.leitura.update.estado', 'uses' => 'LeituraController@updateEstado'])->middleware(['admin']);
-                route::get('imprir/ficha/{id}', ['as' => 'admin.leitura.imprimir.ficha', 'uses' => 'LeituraController@imprirFicha'])->middleware(['admin']);;
+                route::post('update/estado/{id}/{estado}', ['as' => 'admin.leitura.update.estado', 'uses' => 'LeituraController@updateEstado'])->middleware(['bibliotecario']);
+                route::get('imprir/ficha/{id}', ['as' => 'admin.leitura.imprimir.ficha', 'uses' => 'LeituraController@imprirFicha'])->middleware(['bibliotecario']);;
             }
         );
         /* END LEITURA*/

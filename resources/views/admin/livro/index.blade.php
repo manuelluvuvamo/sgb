@@ -27,14 +27,16 @@
                                         @endif
                                         <th>TITULO</th>
                                         <th>CATEGORIA</th>
-                                        <th>ANO DE LANÇAMENTO</th>
+                                        <th>ANO DE <br>LANÇAMENTO</th>
                                         <th>VOLUME</th>
                                         <th>EDITORA</th>
                                         <th>AUTOR(ES)</th>
                                         <th>QUANTIDADE</th>
                                         <th>CADASTRADO POR</th>
                                         <th>DISPONIBILIDADE</th>
+                                        @if (Auth::user()->perfil == 'Administrador')
                                         <th>ACÇÕES</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +81,7 @@
                                                     </select>
 
                                                 </td>
-
+                                                @if (Auth::user()->perfil == 'Administrador')
                                                 @csrf
                                                 @method('delete')
                                                 <td>
@@ -91,13 +93,13 @@
                                                             <i class="fa fa-clone fa-sm" aria-hidden="true"></i>
                                                         </button>
                                                         <ul class="dropdown-menu dropdown-menu-end">
-
+                                                            @if (Auth::user()->perfil == 'Administrador')
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.livro.edit', $livro->id) }}"><i
                                                                     class="fa fa-pencil" aria-hidden="true"></i>
                                                                 Editar</a>
 
-                                                                @if (Auth::user()->perfil == 'Administrador')
+                                                             
                                                                 <a class="dropdown-item destroy"
                                                                     href="{{ route('admin.livro.destroy', $livro->id) }}"><i
                                                                         class="fa fa-trash" aria-hidden="true"></i>
@@ -119,6 +121,7 @@
 
 
                                                 </td>
+                                                @endif
                                             </tr>
                                         @endforeach
 

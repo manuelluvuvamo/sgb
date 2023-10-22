@@ -4,7 +4,7 @@
     <!-- row -->
     <div class="container-fluid">
         <div class="text-end mb-3">
-            @if (Auth::user()->perfil == 'Administrador')
+            @if (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário')
                 <a href="{{ route('admin.leitura.create') }}" class="btn btn-primary btn-rounded add-staff">Cadastrar</a>
             @endif
         </div>
@@ -22,7 +22,7 @@
                             <table id="example4" class="display" style="min-width: 845px">
                                 <thead>
                                     <tr>
-                                        @if (Auth::user()->perfil == 'Administrador')
+                                        @if (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário')
                                             <th>ID</th>
                                         @endif
                                         <th>NOME DO LEITOR</th>
@@ -37,7 +37,7 @@
                                     @if (isset($leituras))
                                         @foreach ($leituras as $leitura)
                                             <tr>
-                                                @if (Auth::user()->perfil == 'Administrador')
+                                                @if (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário')
                                                     <td>{{ $leitura->id }}</td>
                                                 @endif
                                                 <td>{{ $leitura->nome}}</td>
@@ -91,7 +91,7 @@
                                                                     class="fa fa-pencil" aria-hidden="true"></i>
                                                                 Editar</a>
 
-                                                            @if (Auth::user()->perfil == 'Administrador')
+                                                            @if (Auth::user()->perfil == 'Administrador' )
                                                                 <a class="dropdown-item destroy"
                                                                     href="{{ route('admin.leitura.destroy', $leitura->id) }}"><i
                                                                         class="fa fa-trash" aria-hidden="true"></i>

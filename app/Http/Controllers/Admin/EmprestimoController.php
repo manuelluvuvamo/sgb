@@ -121,7 +121,8 @@ class EmprestimoController extends Controller
     {
         /* $data['users'] = User::all(); */
         $data['professors'] = Professor::all();
-        $data['livros'] = Livro::all();
+        $data['livros'] =Livro::join('editoras', 'livros.id_editora', 'editoras.id')
+        ->select('editoras.nome as editora', 'livros.*')->get();
         return view('admin.emprestimo.create.index', $data);
     }
 

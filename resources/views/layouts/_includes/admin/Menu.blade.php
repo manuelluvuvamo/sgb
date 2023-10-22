@@ -871,7 +871,7 @@
  <div class="deznav">
      <div class="deznav-scroll">
          <ul class="metismenu" id="menu">
-             @if (isset(Auth::user()->perfil) && Auth::user()->perfil == 'Administrador')
+             @if (isset(Auth::user()->perfil) && (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário'))
                  <li><a href="{{ route('admin.dash') }}" class="ai-icon" aria-expanded="false">
                          <i class="fas fa-home" aria-hidden="true"></i>
 

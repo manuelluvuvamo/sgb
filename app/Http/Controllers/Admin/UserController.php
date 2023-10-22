@@ -40,7 +40,7 @@ class UserController extends Controller
         //
         $data['users'] = User::get();
 
-    if (Auth::user()->perfil != "Master"){
+    if (Auth::user()->perfil != "Administrador"){
 
         $data['users'] = User::where('users.id',Auth::user()->id)
         ->get();

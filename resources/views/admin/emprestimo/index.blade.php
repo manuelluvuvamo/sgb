@@ -4,7 +4,7 @@
     <!-- row -->
     <div class="container-fluid">
         <div class="text-end mb-3">
-            @if (Auth::user()->perfil == 'Administrador')
+            @if (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário')
                 <a href="{{ route('admin.emprestimo.create') }}" class="btn btn-primary btn-rounded add-staff">Cadastrar</a>
             @endif
         </div>
@@ -22,7 +22,7 @@
                             <table id="example4" class="display" style="min-width: 845px">
                                 <thead>
                                     <tr>
-                                        @if (Auth::user()->perfil == 'Administrador')
+                                        @if (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário')
                                             <th>ID</th>
                                         @endif
                                         <th>PROFESSOR</th>
@@ -37,7 +37,7 @@
                                     @if (isset($emprestimos))
                                         @foreach ($emprestimos as $emprestimo)
                                             <tr>
-                                                @if (Auth::user()->perfil == 'Administrador')
+                                                @if (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário')
                                                     <td>{{ $emprestimo->id }}</td>
                                                 @endif
                                                 <td>{{ $emprestimo->primeiro_nome . ' ' . $emprestimo->sobrenome }}</td>
@@ -89,13 +89,13 @@
                                                                 href="{{ route('admin.emprestimo.imprimir.ficha', $emprestimo->id) }}" target="_blank"><i
                                                                     class="fa fa-print" aria-hidden="true"></i>
                                                                 Imprimir Ficha</a>
-
+                                                            @if (Auth::user()->perfil == 'Administrador')
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.emprestimo.edit', $emprestimo->id) }}"><i
                                                                     class="fa fa-pencil" aria-hidden="true"></i>
                                                                 Editar</a>
 
-                                                            @if (Auth::user()->perfil == 'Administrador')
+                                                          
                                                                 <a class="dropdown-item destroy"
                                                                     href="{{ route('admin.emprestimo.destroy', $emprestimo->id) }}"><i
                                                                         class="fa fa-trash" aria-hidden="true"></i>

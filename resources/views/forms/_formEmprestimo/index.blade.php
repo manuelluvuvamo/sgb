@@ -47,7 +47,8 @@
 
                 @isset($livros)
                     @foreach ($livros as $livro)
-                        <option value="{{ $livro->id }}" {{ isset($func) ? 'selected' : '' }}>{{ $livro->titulo }}
+                        <option value="{{ $livro->id }}" {{ isset($func) ? 'selected' : '' }}>
+                            {{ $livro->titulo." - Volume: ".$livro->volume. " - Editora: ".$livro->editora }}
                         </option>
                     @endforeach
                 @endisset
@@ -87,7 +88,7 @@
                 <label class="form-label" for="data_entrega">Data de Entrega</label>
                 <input type="date" required 
                     class="form-control default @error('data_entrega') is-invalid @enderror" id="data_entrega"
-                    name="data_entrega" placeholder=""
+                    name="data_entrega" placeholder=""  min="{{date("Y-m-d")}}"
                     value="{{ isset($emprestimo->data_entrega) ? date("Y-m-d",strtotime($emprestimo->data_entrega)) : old("data_entrega") }}"  />
                 @error('data_entrega')
                     <span class="invalid-feedback" role="alert">
