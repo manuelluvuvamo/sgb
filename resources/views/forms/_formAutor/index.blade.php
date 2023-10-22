@@ -22,7 +22,7 @@
             <div class="mb-3">
                 <label class="form-label" for="nacionalidade">Nacionalidade</label>
        
-                <select class="js-example-basic-single form-select @error('nacionalidade') is-invalid @enderror" name="nacionalidade"
+                <select class=" form-control @error('nacionalidade') is-invalid @enderror" name="nacionalidade"
                     id="nacionalidade" required autocomplete="nacionalidade" >
 
                     <option {{ isset($autor->nacionalidade) && $autor->nacionalidade == 'afegão' ? 'selected' : '' }}

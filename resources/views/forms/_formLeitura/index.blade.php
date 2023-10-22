@@ -33,7 +33,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="id_livro" class="form-label">Livro</label>
-            <select class="js-example-basic-single form-select @error('id_livro') is-invalid @enderror"
+            <select class=" form-select @error('id_livro') is-invalid @enderror"
                 id="id_livro" name="id_livro" value="old('id_livro')" required>
 
                 <option value="{{ isset($leitura) ? $leitura->id_livro : '0' }}" {{ isset($func) ? '' : 'selected' }}>

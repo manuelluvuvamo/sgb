@@ -23,7 +23,7 @@
                             
                             <div class="form-group col-md-4">
                                 <label for="id_categoria" class="form-label">Categoria</label>
-                                <select name="id_categoria" id="id_categoria" class="form-control js-example-basic-single">
+                                <select name="id_categoria" id="id_categoria" class="form-control ">
                                     <option value=All>Todas</option>
 
                                     @foreach ($categorias as $categoria)
@@ -37,7 +37,7 @@
 
                             <div class="form-group col-md-4">
                                 <label for="id_editora" class="form-label">Editora</label>
-                                <select name="id_editora" id="id_editora" class="form-control js-example-basic-single">
+                                <select name="id_editora" id="id_editora" class="form-control ">
                                     <option value=All>Todas</option>
 
                                     @foreach ($editoras as $editora)
@@ -51,7 +51,7 @@
 
                             <div class="form-group col-md-4">
                                 <label for="id_autor" class="form-label">Autor</label>
-                                <select name="id_autor" id="id_autor" class="form-control js-example-basic-single">
+                                <select name="id_autor" id="id_autor" class="form-control ">
                                     <option value=All>Todos</option>
 
                                     @foreach ($autores as $autor)

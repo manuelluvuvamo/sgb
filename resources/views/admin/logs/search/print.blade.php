@@ -23,7 +23,7 @@
 
                                 <div class="form-group col-md-4">
                                     <label for="name" class="form-label">Utilizador</label>
-                                    <select name="name" id="name" class="form-control js-example-basic-single">
+                                    <select name="name" id="name" class="form-control ">
                                         <option value=null>Todos</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}">

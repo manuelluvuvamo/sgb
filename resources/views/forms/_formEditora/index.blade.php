@@ -25,7 +25,7 @@
                 <label class="form-label" for="pais">
                     País</label>
 
-                <select class="js-example-basic-single form-select @error('pais') is-invalid @enderror" name="pais"
+                <select class="form-control @error('pais') is-invalid @enderror" name="pais"
                     id="pais" required autocomplete="pais">
 
                     <option {{ isset($editora->pais) && $editora->pais == 'Afeganistão' ? 'selected' : '' }}

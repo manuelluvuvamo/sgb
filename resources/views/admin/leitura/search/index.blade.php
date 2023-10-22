@@ -26,7 +26,7 @@
 
                             <div class="form-group col-md-4">
                                 <label for="id_livro" class="form-label">Livro</label>
-                                <select name="id_livro" id="id_livro" class="form-control js-example-basic-single">
+                                <select name="id_livro" id="id_livro" class="form-control ">
                                     <option value=All>Todos</option>
 
                                     @foreach ($livros as $livro)

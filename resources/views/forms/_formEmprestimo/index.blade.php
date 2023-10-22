@@ -4,7 +4,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="id_professor" class="form-label">Professor</label>
-            <select class="js-example-basic-single form-select @error('id_professor') is-invalid @enderror"
+            <select class=" form-select @error('id_professor') is-invalid @enderror"
                 id="id_professor" name="id_professor" value="old('id_professor')" required>
 
                 <option value="{{ isset($emprestimo) ? $emprestimo->id_professor : '0' }}" {{ isset($func) ? '' : 'selected' }}>
