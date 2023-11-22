@@ -50,6 +50,10 @@
         div.swal2-select{
             display: none !important;
         }
+
+        .DZ-bt-buy-now, .DZ-bt-support-now {
+            display: none!important;
+        }
     </style>
     @yield('style')
     @php
