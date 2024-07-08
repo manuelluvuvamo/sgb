@@ -62,7 +62,7 @@ class EditoraController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'pais' => 'required|string|max:255',
-            'codigo' => 'string|max:255',
+            /* 'codigo' => 'string|max:255', */
         ]);
 
         try {
@@ -73,9 +73,9 @@ class EditoraController extends Controller
             $editora = Editora::create([
                 'nome' => $request->nome,
                 'pais' => $request->pais,
-                'codigo' => $request->codigo,
+                /* 'codigo' => $request->codigo, */
             ]);
-            $this->loggerData(" Cadastrou a editora  de nome " . $request->nome . ", país $request->pais, código $request->codigo, id: " . $editora->id);
+            $this->loggerData(" Cadastrou a editora  de nome " . $request->nome . ", país $request->pais, id: " . $editora->id);
             return redirect()->back()->with('editora.create.success', 1);
 
         } catch (\Throwable $th) {
@@ -125,7 +125,7 @@ class EditoraController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'pais' => 'required|string|max:255',
-            'codigo' => 'string|max:255',
+            /* 'codigo' => 'string|max:255', */
         ]);
 
         try {
@@ -135,9 +135,9 @@ class EditoraController extends Controller
             $cat = Editora::findOrFail($id)->update([
                 'nome' => $request->nome,
                 'pais' => $request->pais,
-                'codigo' => $request->codigo,
+                /* 'codigo' => $request->codigo, */
             ]);
-            $this->loggerData(" Editou a editora  de id, nome, pais, código ($editora->id, $editora->nome, $editora->pais, $editora->codigo) para ($request->nome, $request->pais, $request->pais)");
+            $this->loggerData(" Editou a editora  de id, nome, pais ($editora->id, $editora->nome, $editora->pais) para ($request->nome, $request->pais, $request->pais)");
 
             return redirect()->back()->with('editora.update.success', 1);
 
@@ -162,7 +162,7 @@ class EditoraController extends Controller
             $editora = Editora::findOrFail($id);
 
             Editora::findOrFail($id)->delete();
-            $this->loggerData(" Eliminou a editora  de id, nome, pais, código ($editora->id,$editora->nome, $editora->pais, $editora->codigo)");
+            $this->loggerData(" Eliminou a editora  de id, nome, pais ($editora->id,$editora->nome, $editora->pais)");
             return redirect()->back()->with('editora.destroy.success', 1);
         } catch (\Throwable $th) {
             //throw $th;
@@ -178,7 +178,7 @@ class EditoraController extends Controller
             //code...
             $editora = Editora::findOrFail($id);
             Editora::findOrFail($id)->forceDelete();
-            $this->loggerData(" Purgou a editora  de id, nome, pais, código ($editora->id,$editora->nome, $editora->pais, $editora->codigo) ");
+            $this->loggerData(" Purgou a editora  de id, nome, pais ($editora->id,$editora->nome, $editora->pais) ");
             return redirect()->back()->with('editora.purge.success', 1);
         } catch (\Throwable $th) {
             //throw $th;

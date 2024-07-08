@@ -25,4 +25,8 @@ class LivroAutor extends Model
 
     ];
     protected $dates = ['deleted_at'];
+
+    public function autor() {
+        return $this->belongsTo(Autor::class, 'id_autor', 'id');
+    }
 }

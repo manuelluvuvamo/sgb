@@ -7,6 +7,9 @@
             <button class="btn btn-primary" onclick="window.history.go(-1)">
                 <strong class="text-light text-white">Voltar</strong>
             </button>
+            @if (Auth::user()->perfil == 'Administrador')
+            <a href="{{ route('admin.emprestimo.create') }}" class="btn btn-primary  add-staff">Cadastrar</a>
+            @endif
         </div>
         <div class="page-titles">
             <ol class="breadcrumb">

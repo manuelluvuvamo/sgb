@@ -64,7 +64,7 @@ class ProfessorController extends Controller
             'sobrenome' => 'required|string|max:255',
             'telefone' => 'required|string|max:255',
             'endereco' => 'string|max:255',
-            'bi' => 'string|max:14',
+            'bi' => 'string|max:14|unique:professors',
         ]);
 
         try {

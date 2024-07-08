@@ -804,7 +804,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         <div class="form-group">
             <div class="mb-3">
                 <label class="form-label" for="codigo">
@@ -819,7 +819,7 @@
                 @enderror
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 </div>

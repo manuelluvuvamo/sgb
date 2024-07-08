@@ -30,7 +30,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="id_categoria" class="form-label">Categoria</label>
-            <select class=" form-select @error('id_categoria') is-invalid @enderror"
+            <select class="form-control form-select @error('id_categoria') is-invalid @enderror"
                 id="id_categoria" name="id_categoria" value="old('id_categoria')" required>
 
                 <option value="{{ isset($livro) ? $livro->id_categoria : '0' }}" {{ isset($func) ? '' : 'selected' }}>
@@ -58,7 +58,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="id_editora" class="form-label">Editora</label>
-            <select class=" form-select @error('id_editora') is-invalid @enderror"
+            <select class="form-control form-select @error('id_editora') is-invalid @enderror"
                 id="id_editora" name="id_editora" value="old('id_editora')" required>
 
                 <option value="{{ isset($livro) ? $livro->id_editora : '0' }}" {{ isset($func) ? '' : 'selected' }}>

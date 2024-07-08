@@ -19,9 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::
         namespace('Site')->group(function () {
             Route::get('/', ['as' => 'site.home', 'uses' => 'HomeController@index']);
+            Route::get('/livos/pesquisar', ['as' => 'site.livros.pesquisar', 'uses' => 'LivroController@pesquisa']);
         });
 
-        
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -19,7 +19,11 @@ class Editora extends Model
     protected $fillable = [
         'nome',
         'pais',
-        'codigo'
+       /*  'codigo' */
     ];
     protected $dates = ['deleted_at'];
+
+    public function livro() {
+        return $this->hasMany(Livro::class, 'id_editora', 'id');
+    }
 }

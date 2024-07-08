@@ -27,7 +27,7 @@
                                         @endif
                                         <th>NOME</th>
                                         <th>PAÍS</th>
-                                        <th>CÓDIGO</th>
+                                     {{--    <th>CÓDIGO</th> --}}
                                         @if(Auth::user()->perfil=='Administrador')
                                         <th>ACÇÕES</th>
                                         @endif
@@ -42,7 +42,7 @@
                                                 @endif
                                                 <td>{{ $editora->nome }}</td>
                                                 <td>{{ $editora->pais }}</td>
-                                                <td>{{ $editora->codigo }}</td>
+                                              {{--   <td>{{ $editora->codigo }}</td> --}}
                                                 @if(Auth::user()->perfil=='Administrador')
                                                 @csrf
                                                 @method('delete')

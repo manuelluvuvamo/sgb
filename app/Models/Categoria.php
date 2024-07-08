@@ -20,4 +20,8 @@ class Categoria extends Model
         'nome',
     ];
     protected $dates = ['deleted_at'];
+
+    public function livro() {
+        return $this->hasMany(Livro::class, 'id_categoria', 'id');
+    }
 }

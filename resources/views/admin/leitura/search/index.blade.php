@@ -7,6 +7,9 @@
             <button class="btn btn-primary" onclick="window.history.go(-1)">
                 <strong class="text-light text-white">Voltar</strong>
             </button>
+            @if (Auth::user()->perfil == 'Administrador' || Auth::user()->perfil == 'Bibliotecário')
+            <a href="{{ route('admin.leitura.create') }}" class="btn btn-primary  add-staff">Cadastrar</a>
+        @endif
         </div>
         <div class="page-titles">
             <ol class="breadcrumb">
